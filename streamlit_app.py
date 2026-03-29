@@ -7,6 +7,7 @@ from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain.tools.retriever import create_retriever_tool
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
+from langchain_core.messages import BaseMessage
 
 # ================= LLM PROVIDERS =================
 from langchain_openai import ChatOpenAI
@@ -19,12 +20,16 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
-# ================= CACHING =================
-from langchain.globals import set_llm_cache
-from langchain.cache import SQLiteCache
-
-# Setup SQLite cache for semantic caching & latency reduction (~30% latency gain)
-set_llm_cache(SQLiteCache(database_path=".langchain_cache.db"))
+# ================= CACHING (optional — gracefully disabled if unavailable) =================
+try:
+    from langchain.globals import set_llm_cache
+    try:
+        from langchain_community.cache import SQLiteCache  # langchain >= 0.2
+    except ImportError:
+        from langchain.cache import SQLiteCache              # langchain < 0.2
+    set_llm_cache(SQLiteCache(database_path=".langchain_cache.db"))
+except Exception:
+    pass  # Caching is optional; skip if not supported on this platform
 
 # ================= UI & APP STATE =================
 st.set_page_config(page_title="Enterprise Agentic RAG", layout="wide", page_icon="🏢")
