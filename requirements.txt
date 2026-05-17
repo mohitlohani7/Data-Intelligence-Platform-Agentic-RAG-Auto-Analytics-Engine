@@ -1,35 +1,35 @@
 streamlit==1.35.0
 
-# LangChain Ecosystem (Stable Compatible Versions)
+# LangChain Ecosystem
 langchain==0.2.16
 langchain-core==0.2.38
 langchain-community==0.2.16
 langchain-openai==0.1.23
 langchain-text-splitters==0.2.4
 
-# Optional LLM Providers
+# Optional Providers
 langchain-anthropic==0.1.23
 langchain-groq==0.1.9
 
 # OpenAI
 openai==1.40.6
 
-# Pydantic Compatibility
+# Pydantic
 pydantic==2.8.2
 
 # Vector Store
-faiss-cpu==1.8.0.post1
+faiss-cpu==1.13.0
 
 # Tokenizer
 tiktoken==0.7.0
 
-# PDF Processing
+# PDF
 pypdf==4.3.1
 
-# Environment Variables
+# Environment
 python-dotenv==1.0.1
 
-# Data Processing
+# Data
 requests==2.32.3
 pandas==2.2.2
 numpy==1.26.4
